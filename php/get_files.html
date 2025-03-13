@@ -119,17 +119,22 @@
             xhr.send();
         }
     
-        // Fonction pour supprimer les accents d'une chaîne de caractères
-        function removeAccents(str) {
-            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        // Fonction pour normaliser une chaîne (supprime les accents, espaces et caractères spéciaux)
+        function normalizeString(str) {
+            return str
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Supprime les accents
+                .toLowerCase() // Convertit en minuscules
+                .replace(/[\s_\-]/g, ""); // Supprime espaces, underscores et tirets
         }
     
         // Fonction pour filtrer les fichiers en fonction de la recherche
         function filterFiles() {
-            var query = removeAccents(document.getElementById('search-bar').value.toLowerCase());
+            var query = normalizeString(document.getElementById('search-bar').value);
+
             var filteredFiles = files.filter(function(file) {
-                return removeAccents(file.name.toLowerCase()).includes(query);
+                return normalizeString(file.name).includes(query);
             });
+
             displayFiles(filteredFiles);
         }
     
@@ -158,7 +163,7 @@
         // Appel de la fonction pour récupérer les fichiers au chargement de la page
         fetchFiles();
     
-        // Ajout d'un écouteur d'événement pour la barre de recherche
+        // Ajout de l'écouteur d'événement pour la recherche
         document.getElementById('search-bar').addEventListener('input', filterFiles);
     </script>
 </body>
