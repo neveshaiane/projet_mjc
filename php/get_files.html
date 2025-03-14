@@ -155,7 +155,15 @@
                     docIcon.className = 'file-icon';
                     fileLink.appendChild(docIcon);
                     addTitle(fileObj, fileLink);
-                } else if (['mp4', 'avi', 'mkv', 'mp3', 'wav'].indexOf(fileExtension) !== -1) {
+                } else if (['mp3', 'wav'].indexOf(fileExtension) !== -1) {
+                    // Fichiers  audio
+                    var mediaIcon = document.createElement('img');
+                    mediaIcon.src = '../../../media/lecteur-audio.png';
+                    mediaIcon.alt = 'Media';
+                    mediaIcon.className = 'file-icon';
+                    fileLink.appendChild(mediaIcon);
+                    addTitle(fileObj, fileLink);
+                } else if (['mp4', 'avi', 'mkv', 'MPG'].indexOf(fileExtension) !== -1) {
                     // Fichiers vidéo et audio
                     var mediaIcon = document.createElement('img');
                     mediaIcon.src = '../../../media/lecteur-video.png';
