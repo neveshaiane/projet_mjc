@@ -259,17 +259,25 @@
         // Fonction pour normaliser une chaîne (supprime les accents, espaces et caractères spéciaux)
         function normalizeString(str) {
             return str
-                .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Supprime les accents
-                .toLowerCase() // Convertit en minuscules
-                .replace(/[\s_\-]/g, ""); // Supprime espaces, underscores et tirets
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove accents
+                .toLowerCase() // Convert to lowercase
+                .replace(/[^a-z0-9]+/g, " ") // Replace non-alphanumeric characters with spaces
+                .trim(); // Remove leading/trailing spaces
         }
 
         // Fonction pour filtrer les fichiers en fonction de la recherche
         function filterFiles() {
             var query = normalizeString(document.getElementById('search-bar').value);
+            var queryWords = query.split(/\s+/); // Split query into words by spaces
 
             var filteredFiles = files.filter(function(file) {
-                return normalizeString(file.name).includes(query);
+                var normalizedFileName = normalizeString(file.name);
+                var fileWords = normalizedFileName.split(/\s+/); // Split file name into words by spaces
+                return queryWords.every(function(word) {
+                    return fileWords.some(function(fileWord) {
+                        return fileWord.includes(word); // Check if any file word contains the query word
+                    });
+                });
             });
 
             displayFiles(filteredFiles);
