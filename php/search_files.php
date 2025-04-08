@@ -109,6 +109,8 @@ if (!empty($results)) {
     echo '<div id="file-list">';
     foreach ($results as $file) {
         echo '<div class="file-tile">';
+        // Affichage du nom du fichier au-dessus de l'aperçu
+        echo '<p style="margin-bottom: 10px; font-size: 0.9em; color: #333; font-weight: bold;">' . htmlspecialchars($file['name']) . '</p>';
         echo '<a href="' . $file['path'] . '" target="_blank" style="text-decoration: none; color: inherit;">';
         $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
         if (in_array($extension, ['jpg', 'png', 'jpeg', 'gif'])) {
