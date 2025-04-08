@@ -26,7 +26,6 @@ h2 {
 
 h3 {
     text-align: center;
-    text-decoration: underline;
     margin-bottom: 5px;
 }
 
@@ -140,6 +139,25 @@ section {
 #revenir_img:hover {
     cursor: pointer;
 }
+
+/*survol pour index*/
+
+
+  .i_survol {
+    display: block;
+}
+  
+.tuile h3 i {
+    margin-right: 10px;
+    color: #73463C;
+  }
+
+.i_survol:hover {
+    transform: translateY(-3px);
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.15);
+    background-color: rgb(255, 250, 250);
+    border-radius: 8px;
+  }
 
 
 /* Pages des DOSSIERS */
